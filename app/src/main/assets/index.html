@@ -1,0 +1,117 @@
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">  
+<meta name="theme-color" content="#6425D9"><title>ARTOM — Create Without Limits</title>  
+<style>  
+:root{--p:#6425D9;--pd:#4b19aa;--bg:#f7f6fa;--ink:#20202a;--muted:#777487;--card:#fff;--line:#eceaf2}  
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);padding-bottom:86px}  
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}  
+header{background:linear-gradient(135deg,#6425D9,#8b5cf6);color:white;padding:20px 18px 22px;border-radius:0 0 24px 24px}  
+.top{display:flex;justify-content:space-between;align-items:center}.brand{font-size:24px;font-weight:900;letter-spacing:1px}.tag{font-size:12px;opacity:.9;margin-top:2px}.avatar{width:40px;height:40px;border-radius:50%;background:#ffffff2b;display:grid;place-items:center;font-weight:800}  
+main{max-width:850px;margin:auto;padding:18px}.search{width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:#fff;margin:18px 0 20px;outline:none}  
+h2{font-size:18px;margin:18px 0 12px}p.sub{color:var(--muted);font-size:13px;margin:-5px 0 14px}  
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.tile{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:left;min-height:118px;box-shadow:0 4px 14px #24104a08}.tile .ico{font-size:26px}.tile b{display:block;margin:10px 0 4px}.tile small{color:var(--muted)}  
+.btn{background:var(--p);color:#fff;padding:12px 16px;border-radius:12px;font-weight:700}.btn.secondary{background:#f0eaff;color:var(--pd)}.btn.ghost{background:#fff;color:var(--p);border:1px solid #e3d8ff}.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px;margin:12px 0}.list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.wall{height:145px;border-radius:14px;position:relative;overflow:hidden;display:flex;align-items:end;padding:12px;color:white;font-weight:800;background:linear-gradient(135deg,#20124d,#b06cff)}.wall:nth-child(2){background:linear-gradient(135deg,#0f766e,#a7f3d0)}.wall:nth-child(3){background:linear-gradient(135deg,#0f172a,#64748b)}.wall:nth-child(4){background:linear-gradient(135deg,#7c2d12,#fb923c)}.wall:nth-child(5){background:linear-gradient(135deg,#1e3a8a,#38bdf8)}.wall:nth-child(6){background:linear-gradient(135deg,#831843,#f9a8d4)}  
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:9px 4px calc(9px + env(safe-area-inset-bottom));z-index:10}  
+nav button{background:none;color:var(--muted);font-size:11px;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 8px}nav button span{font-size:20px}nav button.active{color:var(--p);font-weight:800}  
+.page{display:none}.page.active{display:block}.muted{color:var(--muted);font-size:13px}.project{display:flex;gap:12px;align-items:center}.thumb{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#6425D9,#c4b5fd);flex-shrink:0;display:grid;place-items:center;color:#fff;font-weight:900}  
+label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px}input[type=text],input[type=number],select{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff}  
+canvas{width:100%;max-height:480px;object-fit:contain;background:#eee;border-radius:12px;display:block;margin:12px auto;touch-action:pan-y}  
+.tools{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.tools button{padding:11px;border-radius:10px;background:#f3efff;color:var(--pd);font-weight:700}  
+.modal{position:fixed;inset:0;background:#17102088;display:none;align-items:end;z-index:20}.modal.show{display:flex}.sheet{background:#fff;border-radius:22px 22px 0 0;padding:20px;width:100%;max-height:88vh;overflow:auto}.close{float:right;background:#f2eff7;border-radius:50%;width:34px;height:34px}  
+hr{border:0;border-top:1px solid var(--line);margin:14px 0}  
+@media(min-width:650px){.grid{grid-template-columns:repeat(4,1fr)}.list{grid-template-columns:repeat(3,1fr)}}  
+</style></head>  
+<body>  
+<header><div class="top"><div><div class="brand">ARTOM</div><div class="tag">Create Without Limits.</div></div><div class="avatar">A</div></div></header>  
+<main>  
+<section id="home" class="page active">  
+<input class="search" id="homeSearch" placeholder="Search tools, templates and wallpapers…" oninput="searchHome(this.value)">  
+<h2>What would you like to create?</h2>  
+<div class="grid">  
+<button class="tile" onclick="openEditor('flyer')"><div class="ico">🎨</div><b>Create a Flyer</b><small>Posters, adverts and invitations</small></button>  
+<button class="tile" onclick="openEditor('photo')"><div class="ico">📸</div><b>Photo Editor</b><small>Filters and image adjustments</small></button>  
+<button class="tile" onclick="go('ai')"><div class="ico">✨</div><b>AI Studio</b><small>Coming soon — core editor available</small></button>  
+<button class="tile" onclick="go('wallpapers')"><div class="ico">🖼️</div><b>Wallpapers</b><small>Explore colourful backgrounds</small></button>  
+</div>  
+<h2>Quick start</h2><div class="row"><button class="btn" onclick="openEditor('flyer')">＋ New design</button><button class="btn secondary" onclick="document.getElementById('photoInput').click()">Import photo</button></div>  
+<h2>Recently edited</h2><div id="recent"><p class="muted">Your saved projects will appear here.</p></div>  
+</section>  <section id="explore" class="page"><h2>Explore ARTOM</h2><p class="sub">Find a starting point for your next creation.</p>  
+<div class="grid">  
+<button class="tile" onclick="openEditor('flyer')"><div class="ico">📣</div><b>Business flyers</b><small>Promotions and announcements</small></button>  
+<button class="tile" onclick="openEditor('flyer')"><div class="ico">🎉</div><b>Events</b><small>Invitations and celebrations</small></button>  
+<button class="tile" onclick="go('wallpapers')"><div class="ico">🌄</div><b>Wallpapers</b><small>Backgrounds for your phone</small></button>  
+<button class="tile" onclick="openEditor('photo')"><div class="ico">🪄</div><b>Photo effects</b><small>Adjust and enhance images</small></button>  
+</div></section>  <section id="create" class="page"><h2>Create something</h2><p class="sub">Choose a canvas and start editing.</p>  
+<div class="grid"><button class="tile" onclick="openEditor('flyer')"><div class="ico">📰</div><b>Flyer / Poster</b><small>Portrait design canvas</small></button><button class="tile" onclick="openEditor('photo')"><div class="ico">🖼️</div><b>Edit a photo</b><small>Import from your device</small></button></div>  
+</section>  <section id="projects" class="page"><h2>My Projects</h2><p class="sub">Projects are saved on this device.</p><div id="projectList"><p class="muted">No saved projects yet.</p></div></section>  <section id="profile" class="page"><h2>Your ARTOM</h2><div class="card"><div class="project"><div class="thumb">A</div><div><b>ARTOM Creator</b><div class="muted">Free plan · Stored on this device</div></div></div></div><div class="card"><b>ARTOM Premium</b><p class="muted">Premium templates, advanced tools and AI features are planned for a future release.</p><button class="btn secondary" onclick="toast('Premium membership is not available in this first version.')">Explore Premium</button></div><div class="card"><b>Settings</b><p class="muted">Your projects stay in this browser's local storage. Clearing browser data may remove them.</p><button class="btn ghost" onclick="if(confirm('Delete all saved ARTOM projects on this device?')){localStorage.removeItem('artomProjects');renderProjects();toast('Projects deleted')}">Delete all projects</button></div></section>  <section id="wallpapers" class="page"><h2>Wallpaper Studio</h2><p class="sub">Choose a background and save it to your device.</p><div class="list" id="wallGrid"></div></section>  
+<section id="ai" class="page"><h2>AI Studio</h2><div class="card"><div style="font-size:36px">✨</div><b>AI creativity is coming to ARTOM</b><p class="muted">AI image generation and one-tap background removal need a connected image-processing service. They are not enabled in this offline first version.</p><button class="btn secondary" onclick="openEditor('photo')">Use Photo Editor instead</button></div></section>  <section id="editor" class="page">  
+<div class="row" style="justify-content:space-between"><div><h2 id="editorTitle">Design Studio</h2><p class="sub">Make it yours, then save or export.</p></div><button class="btn ghost" onclick="go('home')">Close</button></div>  
+<div class="card">  
+<label>Design title</label><input id="designTitle" type="text" value="My ARTOM Design">  
+<div class="row"><button class="btn secondary" onclick="document.getElementById('photoInput').click()">＋ Add photo</button><button class="btn secondary" onclick="addText()">＋ Add text</button></div>  
+<canvas id="artCanvas" width="900" height="1200"></canvas>  
+<div class="tools">  
+<div><label>Text</label><input id="textValue" type="text" value="Create Without Limits"></div>  
+<div><label>Text colour</label><input id="textColor" type="color" value="#ffffff" style="width:100%;height:42px"></div>  
+<div><label>Background</label><input id="bgColor" type="color" value="#6425D9" style="width:100%;height:42px"></div>  
+<div><label>Font size</label><input id="fontSize" type="number" value="64" min="12" max="150"></div>  
+</div>  
+<div class="row" style="margin-top:12px"><button class="btn secondary" onclick="applyText()">Update text</button><button class="btn secondary" onclick="resetCanvas()">Reset canvas</button></div>  
+<hr><h3 style="font-size:15px">Photo adjustments</h3>  
+<label>Brightness</label><input id="brightness" type="range" min="50" max="160" value="100" oninput="applyFilters()">  
+<label>Contrast</label><input id="contrast" type="range" min="50" max="160" value="100" oninput="applyFilters()">  
+<label>Filter</label><select id="filter" onchange="applyFilters()"><option value="none">Original</option><option value="grayscale(1)">Grayscale</option><option value="sepia(1)">Sepia</option><option value="saturate(1.7)">Vivid</option><option value="hue-rotate(35deg)">Warm shift</option></select>  
+<div class="row" style="margin-top:16px"><button class="btn" onclick="saveProject()">Save project</button><button class="btn secondary" onclick="exportImage()">Export PNG</button></div>  
+</div>  
+</section>  
+</main>  
+<nav>  
+<button class="active" data-tab="home" onclick="go('home')"><span>⌂</span>Home</button>  
+<button data-tab="explore" onclick="go('explore')"><span>⌕</span>Explore</button>  
+<button data-tab="create" onclick="go('create')"><span>＋</span>Create</button>  
+<button data-tab="projects" onclick="go('projects')"><span>▣</span>Projects</button>  
+<button data-tab="profile" onclick="go('profile')"><span>◉</span>Profile</button>  
+</nav>  
+<input id="photoInput" type="file" accept="image/*" hidden onchange="loadPhoto(event)">  
+<div class="modal" id="previewModal"><div class="sheet"><button class="close" onclick="closePreview()">×</button><h3 id="previewName">Wallpaper</h3><div id="wallPreview" style="height:55vh;border-radius:16px;margin:12px 0"></div><button class="btn" onclick="downloadWallpaper()">Save wallpaper</button></div></div>  
+<script>  
+const $=id=>document.getElementById(id);let mode='flyer',photo=null,photoFilters={brightness:100,contrast:100,filter:'none'},wallCurrent=null;  
+const walls=[  
+{name:'Violet Dreams',bg:'linear-gradient(145deg,#160b38,#6425d9,#d8b4fe)'},  
+{name:'Ocean Calm',bg:'linear-gradient(145deg,#042f2e,#0f766e,#99f6e4)'},  
+{name:'Midnight',bg:'linear-gradient(145deg,#020617,#1e293b,#64748b)'},  
+{name:'Sunset Glow',bg:'linear-gradient(145deg,#7c2d12,#ea580c,#fdba74)'},  
+{name:'Blue Horizon',bg:'linear-gradient(145deg,#172554,#2563eb,#7dd3fc)'},  
+{name:'Pink Aura',bg:'linear-gradient(145deg,#500724,#be185d,#fbcfe8)'}  
+];  
+function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));if(id==='projects')renderProjects();if(id==='home')renderRecent();window.scrollTo(0,0)}  
+function toast(s){let t=document.createElement('div');t.textContent=s;t.style='position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#24133d;color:white;padding:12px 18px;border-radius:12px;z-index:40;font-size:13px';document.body.append(t);setTimeout(()=>t.remove(),2200)}  
+function ctx(){return $('artCanvas').getContext('2d')}  
+function resetCanvas(){photo=null;photoFilters={brightness:100,contrast:100,filter:'none'};$('brightness').value=100;$('contrast').value=100;$('filter').value='none';drawCanvas()}  
+function drawCanvas(){let c=$('artCanvas'),x=ctx();x.clearRect(0,0,c.width,c.height);x.fillStyle=$('bgColor').value;x.fillRect(0,0,c.width,c.height);  
+if(photo){x.save();x.filter=`brightness(${photoFilters.brightness}%) contrast(${photoFilters.contrast}%) ${photoFilters.filter==='none'?'':photoFilters.filter}`;let scale=Math.max(c.width/photo.width,c.height/photo.height),w=photo.width*scale,h=photo.height*scale;x.drawImage(photo,(c.width-w)/2,(c.height-h)/2,w,h);x.restore();x.fillStyle='#0005';x.fillRect(0,0,c.width,c.height)}  
+x.fillStyle=$('textColor').value;x.textAlign='center';x.font=`800 ${Math.min(150,Math.max(12,+$('fontSize').value||64))}px system-ui`;wrapText(x,$('textValue').value,c.width/2,c.height*.52,c.width*.82,1.25)}  
+function wrapText(x,text,cx,y,max,lineH){let words=text.split(' '),line='',lines=[];for(let w of words){let test=line+w+' ';if(x.measureText(test).width>max&&line){lines.push(line.trim());line=w+' '}else line=test}if(line)lines.push(line.trim());lines.slice(0,5).forEach((l,i)=>x.fillText(l,cx,y+(i-(Math.min(lines.length,5)-1)/2)*(+ $('fontSize').value||64)*lineH))}  
+function openEditor(m){mode=m;$('editorTitle').textContent=m==='flyer'?'Flyer Maker':'Photo Editor';if(m==='photo'){$('bgColor').value='#20202a';$('textValue').value='';}else{$('bgColor').value='#6425D9';$('textValue').value='Create Without Limits';}drawCanvas();go('editor')}  
+function applyText(){drawCanvas();toast('Text updated')}  
+function addText(){ $('textValue').value=$('textValue').value||'Your text here';$('textValue').focus();toast('Edit the text field, then tap Update text')}  
+function loadPhoto(e){let f=e.target.files[0];if(!f)return;let u=URL.createObjectURL(f),im=new Image();im.onload=()=>{photo=im;drawCanvas();URL.revokeObjectURL(u);if(!$('editor').classList.contains('active'))go('editor')};im.src=u;e.target.value=''}  
+function applyFilters(){photoFilters={brightness:+$('brightness').value,contrast:+$('contrast').value,filter:$('filter').value};drawCanvas()}  
+function exportImage(){drawCanvas();let a=document.createElement('a');a.download=(safeName($('designTitle').value)||'artom-design')+'.png';a.href=$('artCanvas').toDataURL('image/png');a.click();toast('PNG export started')}  
+function safeName(s){return (s||'').replace(/[^\w-]+/g,'-').slice(0,50)}  
+function getProjects(){try{return JSON.parse(localStorage.getItem('artomProjects')||'[]')}catch(e){return []}}  
+function saveProject(){drawCanvas();let p=getProjects(),item={id:Date.now(),title:$('designTitle').value||'Untitled design',data:$('artCanvas').toDataURL('image/jpeg',.82),date:new Date().toLocaleString()};p.unshift(item);localStorage.setItem('artomProjects',JSON.stringify(p.slice(0,30)));toast('Project saved on this device');renderProjects();renderRecent()}  
+function renderProjects(){let p=getProjects();$('projectList').innerHTML=p.length?p.map(x=>`<div class="card project"><img class="thumb" src="${x.data}" style="object-fit:cover"><div style="flex:1;min-width:0"><b>${esc(x.title)}</b><div class="muted">${esc(x.date)}</div><div class="row" style="margin-top:7px"><button class="btn secondary" onclick="openSaved(${x.id})">Open</button><button class="btn ghost" onclick="deleteProject(${x.id})">Delete</button></div></div></div>`).join(''):'<p class="muted">No saved projects yet. Create a design and tap Save project.</p>'}  
+function renderRecent(){let p=getProjects().slice(0,2);$('recent').innerHTML=p.length?p.map(x=>`<div class="card project"><img class="thumb" src="${x.data}" style="object-fit:cover"><div><b>${esc(x.title)}</b><div class="muted">${esc(x.date)}</div></div></div>`).join(''):'<p class="muted">Your saved projects will appear here.</p>'}  
+function openSaved(id){let p=getProjects().find(x=>x.id===id);if(!p)return;let im=new Image();im.onload=()=>{photo=im;$('textValue').value='';$('designTitle').value=p.title;drawCanvas();go('editor')};im.src=p.data}  
+function deleteProject(id){localStorage.setItem('artomProjects',JSON.stringify(getProjects().filter(x=>x.id!==id)));renderProjects();renderRecent();toast('Project deleted')}  
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}  
+function renderWalls(){$('wallGrid').innerHTML=walls.map((w,i)=>`<button class="wall" style="background:${w.bg}" onclick="previewWall(${i})">${w.name}</button>`).join('')}  
+function previewWall(i){wallCurrent=walls[i];$('previewName').textContent=wallCurrent.name;$('wallPreview').style.background=wallCurrent.bg;$('previewModal').classList.add('show')}  
+function closePreview(){$('previewModal').classList.remove('show')}  
+function downloadWallpaper(){let c=document.createElement('canvas');c.width=1080;c.height=1920;let x=c.getContext('2d'),g=x.createLinearGradient(0,0,1080,1920);let m=wallCurrent.bg.match(/#[0-9a-fA-F]{6}/g)||['#160b38','#6425d9','#d8b4fe'];g.addColorStop(0,m[0]);g.addColorStop(.5,m[1]||m[0]);g.addColorStop(1,m[2]||m[1]||m[0]);x.fillStyle=g;x.fillRect(0,0,c.width,c.height);x.fillStyle='#ffffffbb';x.font='bold 62px system-ui';x.textAlign='center';x.fillText('ARTOM',540,1740);let a=document.createElement('a');a.download=safeName(wallCurrent.name)+'.png';a.href=c.toDataURL();a.click();toast('Wallpaper saved')}  
+function searchHome(v){let q=v.toLowerCase();document.querySelectorAll('#home .tile').forEach(t=>t.style.display=t.innerText.toLowerCase().includes(q)?'block':'none')}  
+$('bgColor').addEventListener('input',drawCanvas);$('textColor').addEventListener('input',drawCanvas);$('fontSize').addEventListener('input',drawCanvas);$('textValue').addEventListener('change',drawCanvas);  
+renderWalls();drawCanvas();renderRecent();  
+</script></body></html>
